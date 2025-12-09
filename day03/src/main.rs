@@ -1,7 +1,5 @@
-fn main() {
-    let lines = utils::read_input("day03/input");
-
-    let res1: i32 = lines
+fn part1(lines: &Vec<String>) {
+    let res: i32 = lines
         .iter()
         .map(|line| {
             let mut a = -1;
@@ -24,10 +22,12 @@ fn main() {
             a * 10 + b
         })
         .sum();
+    println!("Part1: {}", res);
+}
 
-    dbg!(res1);
-
-    let res2: i64 = lines
+// TODO: Use stack linear approach
+fn part2(lines: &Vec<String>) {
+    let res: i64 = lines
         .iter()
         .map(|line| {
             let n = line.len();
@@ -50,6 +50,15 @@ fn main() {
             res
         })
         .sum();
+    println!("Part2: {}", res);
+}
 
-    dbg!(res2);
+fn main() {
+    let lines = utils::read_input("day03/input.test");
+    part1(&lines);
+    part2(&lines);
+
+    let lines = utils::read_input("day03/input");
+    part1(&lines);
+    part2(&lines);
 }
