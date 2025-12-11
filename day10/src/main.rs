@@ -1,4 +1,6 @@
-use good_lp::*;
+use good_lp::{
+    Expression, ProblemVariables, Solution, SolverModel, Variable, coin_cbc, constraint, variable,
+};
 use std::{cmp::min, i32::MAX};
 
 fn solve1(indicator: i64, buttons: &Vec<i64>, idx: usize, current: i64) -> i64 {
@@ -67,12 +69,13 @@ fn part1(lines: &Vec<String>) {
     println!("Part1: {}", res);
 }
 
+// Read about ILPs and solvers (https://ericpony.github.io/z3py-tutorial/guide-examples.htm)
 fn solve2(target: &[i32], updates: &[Vec<usize>]) -> Option<i32> {
     let mut vars = ProblemVariables::new();
     let m = updates.len();
     let n = target.len();
 
-    let counts: Vec<_> = (0..m)
+    let counts: Vec<Variable> = (0..m)
         .map(|_| vars.add(variable().min(0).integer()))
         .collect();
 
